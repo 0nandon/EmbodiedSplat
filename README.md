@@ -4,8 +4,8 @@ Online Feed-Forward Semantic 3DGS <br>
 for Open-Vocabulary 3D Scene Understanding</h1>
   <p align="center">
     <a href="https://www.linkedin.com/in/seungjun-lee-43101a261/">Seungjun Lee</a></span> ·  
-    <a href="https://www.linkedin.com/in/seungjun-lee-43101a261/">Zihan Wang</a></span> ·
-    <a href="https://www.linkedin.com/in/seungjun-lee-43101a261/">Yunsong Wang</a></span> ·
+    <a href="https://scholar.google.com/citations?user=7rf6Bw4AAAAJ&hl=en">Zihan Wang</a></span> ·
+    <a href="https://wangys16.github.io">Yunsong Wang</a></span> ·
     <a href="https://www.comp.nus.edu.sg/~leegh/">Gim Hee Lee</a><sup></sup> <br>
     National University of Singapore<br>
   </p>
@@ -13,7 +13,7 @@ for Open-Vocabulary 3D Scene Understanding</h1>
   <h3 align="center"><a href="https://github.com/0nandon/SEAL">Code</a> | <a href="">Paper</a> | <a href="https://0nandon.github.io/SEAL/">Project Page</a> </h3>
   <div align="center">
   <a href="https://pytorch.org/get-started/locally/"><img alt="PyTorch" src="https://img.shields.io/badge/PyTorch-ee4c2c?logo=pytorch&logoColor=white"></a>
-    <a href="https://hydra.cc/"><img alt="Config: Hydra" src="https://img.shields.io/badge/Config-Hydra-89b8cd"></a>
+    <a href="https://pytorchlightning.ai/"><img alt="Lightning" src="https://img.shields.io/badge/-Lightning-792ee5?logo=pytorchlightning&logoColor=white"></a>
   </div>
 </p>
 
