@@ -23,7 +23,7 @@ for Open-Vocabulary 3D Scene Understanding</h1>
   </a>
 </p>
 <p align="center">
-<strong>Build and understand at Once.</strong> By taking over 300 streaming images, our <strong>EmbodiedSplat</strong> reconstructs whole-scene open-vocabulary 3DGS in online manner at up to 5-6 FPS per-frame processing time. Reconstructed scene supports diverse perception tasks such as open-vocabulary 3D semantic segmentation, 2D-rendered semantic segmentation and novel-view color synthesis with depth rendering. 
+<strong>Build and understand at Once!</strong> By taking over 300 streaming images, our <strong>EmbodiedSplat</strong> reconstructs whole-scene open-vocabulary 3DGS in online manner at up to 5-6 FPS per-frame processing time. Reconstructed scene supports diverse perception tasks such as open-vocabulary 3D semantic segmentation, 2D-rendered semantic segmentation and novel-view color synthesis with depth rendering. 
 </p>
 
 
