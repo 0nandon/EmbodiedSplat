@@ -140,8 +140,8 @@
       <div class="columns is-centered">
       <div class="column">
         <div class="content"> 
-          <div class="video">
-          <video autoplay loop muted>
+          <div class="video" style="text-align: center;">
+          <video autoplay loop muted style="width: 80%; height: auto;">
                 <source src="./static/images/teaser/teaser.mov" type="video/mp4">
             </video></div>
         </div>
@@ -150,7 +150,8 @@
       <br>
       <h2 class="subtitle has-text-centered" style="margin-bottom: 0rem; margin-top: 0rem;">
       <div class="content has-text-justified">
-      💡 Most of the semantic 3DGS works leverage 2D rendering function to distill/bind language embeddings to 3DGS. <strong><span style="color:#5c66f0;">We don't!</span></strong> <br><br> 💡 Instead, we propose clearly distinct yet creative strategy called <strong><span style="color:#df6950;">Online Sparse Coefficient Field</span></strong> with <strong><span style="color:#df6950;">CLIP Global Codebook</span></strong> to bind language embeddings while minimizing the memory consumption and not losing semantic capability of 2D VLM.
+
+      💡 Our <span class="inline-wordmark" data-text="EmbodiedSplat">EmbodiedSplat</span> simultaneously constructs RGB and open-vocabulary semantic field in online manner. During the exploration, it even refines the part with noisy semantic by exploiting our novel Online Sparse Coefficient Field with CLIP Global Codebook.
       </div>
       </h2>
     </div>
@@ -203,7 +204,7 @@
       </div>
       <br>
       <h2 class="subtitle has-text-centered" style="margin-top: -2rem;">
-     Our <span class="inline-wordmark" data-text="EmbodiedSplat">EmbodiedSplat</span> can localize the 3D objects based on the free-form language along its exploration. 
+     💡 Our <span class="inline-wordmark" data-text="EmbodiedSplat">EmbodiedSplat</span> can localize the 3D objects based on the free-form language along its exploration. 
     </h2>
     </div>
   </div>
@@ -217,6 +218,10 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           Understanding a 3D scene immediately with its exploration is essential for embodied tasks, where an agent must construct and comprehend the 3D scene in an online and nearly real-time manner. In this study, we propose EmbodiedSplat, an online feed-forward 3DGS for open-vocabulary scene understanding that enables simultaneous online 3D reconstruction and 3D semantic understanding from the streaming images. Unlike existing open-vocabulary 3DGS methods which are typically restricted to either offline or per-scene optimization setting, our objectives are two-fold: <strong><span style="color:#df6950;">1)</span></strong> Reconstructs the semantic-embedded 3DGS of the entire scene from over 300 streaming images in an online manner. <strong><span style="color:#df6950;">2)</span></strong> Highly generalizable to novel scenes with feed-forward design and supports nearly real-time 3D semantic reconstruction when combined with real-time 2D models. To achieve these objectives, we propose an Online Sparse Coefficients Field with a CLIP Global Codebook where it binds the 2D CLIP embeddings to each 3D Gaussian while minimizing memory consumption and preserving the full semantic generalizability of CLIP. Furthermore, we generate 3D geometric-aware CLIP features by aggregating the partial point cloud of 3DGS through 3D U-Net to compensate the 3D geometric prior to 2D-oriented language embeddings. Extensive experiments on diverse indoor datasets, including ScanNet, ScanNet++, and Replica, demonstrate both the effectiveness and efficiency of our method. Code will be publicly available on project website.
+
+          <br><br>
+          💡 Most of the semantic 3DGS works leverage 2D rendering function to distill/bind language embeddings to 3DGS. <strong><span style="color:#5c66f0;">We don't!</span></strong> <br><br>
+          💡 Instead, we propose clearly distinct yet creative strategy called <strong><span style="color:#df6950;">Online Sparse Coefficient Field</span></strong> and <strong><span style="color:#df6950;">CLIP Global Codebook</span></strong> to bind language embeddings while minimizing the memory consumption and not losing semantic capability of 2D VLM.
         </div>
       </div>
     </div>
