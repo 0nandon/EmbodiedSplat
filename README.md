@@ -10,7 +10,7 @@ for Open-Vocabulary 3D Scene Understanding</h1>
     National University of Singapore<br>
   </p>
   <h2 align="center">CVPR 2026</h2>
-  <h3 align="center"><a href="https://github.com/0nandon/EmbodiedSplat">Code</a> | <a href="">Paper</a> | <a href="https://0nandon.github.io/EmbodiedSplat/">Project Page</a> </h3>
+  <h3 align="center"><a href="https://github.com/0nandon/EmbodiedSplat">Code</a> | <a href="https://arxiv.org/pdf/2603.04254">Paper</a> | <a href="https://0nandon.github.io/EmbodiedSplat/">Project Page</a> </h3>
   <div align="center">
   <a href="https://pytorch.org/get-started/locally/"><img alt="PyTorch" src="https://img.shields.io/badge/PyTorch-ee4c2c?logo=pytorch&logoColor=white"></a>
     <a href="https://pytorchlightning.ai/"><img alt="Lightning" src="https://img.shields.io/badge/-Lightning-792ee5?logo=pytorchlightning&logoColor=white"></a>
