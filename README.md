@@ -4,7 +4,12 @@ This is the repository that contains source code for the [EmbodiedSplat website]
 
 If you find EmbodiedSplat useful for your work please cite:
 ```
-
+@article{lee2026embodiedsplat,
+  title={EmbodiedSplat: Online Feed-Forward Semantic 3DGS for Open-Vocabulary 3D Scene Understanding},
+  author={Lee, Seungjun and Wang, Zihan and Wang, Yunsong and Lee, Gim Hee},
+  journal={arXiv preprint arXiv:2603.04254},
+  year={2026}
+}
 ```
 
 # Website License
