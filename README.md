@@ -49,5 +49,10 @@ for Open-Vocabulary 3D Scene Understanding</h1>
 ## Citation
 If you find our code or paper useful, please cite
 ```bibtex
-
+@article{lee2026embodiedsplat,
+  title={EmbodiedSplat: Online Feed-Forward Semantic 3DGS for Open-Vocabulary 3D Scene Understanding},
+  author={Lee, Seungjun and Wang, Zihan and Wang, Yunsong and Lee, Gim Hee},
+  journal={arXiv preprint arXiv:2603.04254},
+  year={2026}
+}
 ```
