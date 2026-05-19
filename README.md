@@ -122,8 +122,8 @@ The dafault setting is `incremental`, but it can be changed to `online` by setti
 
 We provide evaluation scripts for diverse settings across ScanNet and ScanNet++, with options to enable or disable GT depth. All the experiments are conducted in single NVIDIA RTX 6000 Ada GPU (48GB).
 
-| Column 1 | EmbodiedSplat | EmbodiedSplat-*fast* |   |
-| -------- | -------- | -------- | - |
+| Column 1 | EmbodiedSplat | EmbodiedSplat-*fast* |  
+| -------- | -------- | -------- |
 | ScanNet    |    [Here](documents/embodiedsplat_scannet.md)      |     [Here](documents/embodiedsplat_fast_scannet.md)      |   
 | ScanNet, GT Depth    |     [Here](documents/embodiedsplat_scannet_gtdepth.md)     |    [Here](documents/embodiedsplat_fast_scannet_gtdepth.md)      |   
 | ScanNet++   |    [Here](documents/embodiedsplat_scannetpp.md)      |     [Here](documents/embodiedsplat_fast_scannetpp.md)     |   
