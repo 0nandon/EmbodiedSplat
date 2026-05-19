@@ -137,25 +137,40 @@
 
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <div class="columns is-centered">
-      <div class="column">
-        <div class="content"> 
-          <div class="video" style="text-align: center;">
-          <video autoplay loop muted style="width: 80%; height: auto;">
-                <source src="./static/images/teaser/teaser.mov" type="video/mp4">
-            </video></div>
+      <div class="columns is-centered teaser-video-pair">
+        <div class="column">
+          <div class="content">
+            <div class="video-hover">
+            <video autoplay loop muted playsinline>
+              <source src="https://huggingface.co/datasets/onandon/EmbodiedSplat/resolve/main/demo.MP4" type="video/mp4">
+              </video></div>
+              <center>
+              <div style="margin-top: 0.5rem;"><p>
+                <i>DEMO video.</i>
+              </p></div>
+            </center>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="content">
+            <div class="video-hover">
+            <video autoplay loop muted playsinline>
+              <source src="./static/images/teaser/teaser.mov" type="video/mp4">
+              </video></div>
+              <center>
+              <div style="margin-top: 0.5rem;"><p>
+                <i>BEV video for whole-scene reconstruction.</i>
+              </p></div>
+            </center>
+          </div>
         </div>
       </div>
-      </div>
       <br>
-      <h2 class="subtitle has-text-centered" style="margin-bottom: 2rem; margin-top: 0rem;">
+      <h2 class="subtitle has-text-centered" style="margin-bottom: 2rem; margin-top: -2rem;">
       <div class="content has-text-justified">
-      💡 Our <span class="inline-wordmark" data-text="EmbodiedSplat">EmbodiedSplat</span> simultaneously constructs RGB and open-vocabulary semantic field in online manner. During the exploration, it even refines the part with noisy semantic by exploiting our novel Online Sparse Coefficient Field with CLIP Global Codebook.
+      💡 Our EmbodiedSplat simultaneously constructs RGB and open-vocabulary semantic field in online manner. During the exploration, it even refines the part with noisy semantic by exploiting our novel Online Sparse Coefficient Field with CLIP Global Codebook.
       </div>
-      </h2>
-
-      <h2 class="subtitle has-text-centered" style="margin-bottom: 0rem; margin-top: 0rem;">
-      ✔️ Online 3DGS &nbsp; ✔️ Feed-Forward Design &nbsp; ✔️ Near Real-time (5-6 FPS) &nbsp; <br> ✔️ Whole-scene (+300 images) &nbsp; ✔️ Memory-Efficient &nbsp; ✔️ Fast 3D Search 
       </h2>
     </div>
   </div>
@@ -207,8 +222,14 @@
       </div>
       <br>
       <h2 class="subtitle has-text-centered" style="margin-top: -2rem;">
-     💡 Our <span class="inline-wordmark" data-text="EmbodiedSplat">EmbodiedSplat</span> can localize the 3D objects based on the free-form language along its exploration. 
+     💡 Our EmbodiedSplat can localize the 3D objects based on the free-form language along its exploration. 
     </h2>
+      <h2 class="subtitle has-text-centered interact-callout-wrap" style="margin-top: 6rem;">
+        <a href="./splat/index.html" class="interact-callout">Interact with reconstructed 3D scene!</a>
+    </h2>
+    <div class="columns is-centered has-text-centered">
+    <div class="content has-text-justified has-text-centered">This will take a while since 3DGS file is huge.</div>
+    </div>
     </div>
   </div>
 </section>
