@@ -101,7 +101,7 @@ cd {YOUR_PATH}
 
 ## Data Preparation
 
-The testing scenes in ScanNet and ScanNet++, and pretrained weights are available <a href="https://huggingface.co/datasets/onandon/SEAL/tree/main">here</a>. You can easily download all the preprocessed data by running:
+The testing scenes in ScanNet and ScanNet++, and pretrained weights are available <a href="https://huggingface.co/datasets/onandon/EmbodiedSplat">here</a>. You can easily download all the preprocessed data by running:
 ```
 python download_data.py
 ```
