@@ -1,0 +1,5 @@
+name: dino_resunet
+
+model: dino_vitb8
+d_out: 512
+resnet_name: resunet

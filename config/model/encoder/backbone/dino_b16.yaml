@@ -1,0 +1,5 @@
+name: dino
+
+model: dino_vitb16
+d_out: 512
+resnet_name: resnet

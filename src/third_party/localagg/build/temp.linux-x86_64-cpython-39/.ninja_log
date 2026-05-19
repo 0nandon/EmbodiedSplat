@@ -1,0 +1,6 @@
+# ninja log v5
+3	1583	1759422757881202635	/data/sjlee/freesplatpp/main/src/third_party/localagg/build/temp.linux-x86_64-cpython-39/src/forward.o	7ddfae0006cd4552
+3	1586	1759422757881202635	/data/sjlee/freesplatpp/main/src/third_party/localagg/build/temp.linux-x86_64-cpython-39/src/backward.o	da326b66cc55f675
+2	14978	1759422771266882552	/data/sjlee/freesplatpp/main/src/third_party/localagg/build/temp.linux-x86_64-cpython-39/ext.o	a2504cd3ac36b746
+2	45300	1759422801574688316	/data/sjlee/freesplatpp/main/src/third_party/localagg/build/temp.linux-x86_64-cpython-39/local_aggregate.o	928d02aa69ddd808
+2	51968	1759422808247526608	/data/sjlee/freesplatpp/main/src/third_party/localagg/build/temp.linux-x86_64-cpython-39/src/aggregator_impl.o	a9992c75a6fe33f5

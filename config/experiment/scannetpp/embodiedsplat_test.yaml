@@ -1,0 +1,88 @@
+# @package _global_
+
+defaults:
+  - override /dataset: scannetpp_cost
+  - override /model/encoder: encoder_test_unet3d_online
+  - override /model/encoder/backbone: efficientnet
+  - override /loss: [semantic]
+
+wandb:
+  name: scannetpp
+  tags: [scannetpp, 384x512]
+
+dataset:
+  image_shape: [384, 512]
+  roots: [dataset/scannetpp]
+  near: 0.5
+  far: 15.
+  sample_num_start: 2
+  sample_num_end: 8
+  view_sampler:
+    num_context_views: 10
+    random: True
+
+model:
+  encoder:
+    n_levels: -1
+    num_views: 5
+    fusion: true
+    cv_type: cv
+    wo_matchnet: true
+    log_plane: true
+    num_depth_candidates: 128
+    low_res: true
+    refine_gs: true
+    refine_pp: true
+    fore_fusion: true
+    refine_window: 30
+    use_gt_depth: false
+    load_cache: false
+    sam_model_type: "fastsam"
+    clip_model: "openseg" 
+    clip_model_type: "" 
+    clip_model_path: "pretrained/saved_openseg/openseg_exported_clip"
+    clip_dim: 768
+    semantic_early_fusion: true
+    non_object_embedding: false
+    use_openscene: false
+    unet_3d: true
+    unet3d_arch: 'MinkUNet18A'
+    unet3d_norm_freeze: false
+    pcd_aug: false
+    voxel_size: 0.02
+    memory: true
+    max_batch: 10
+    openvocab_domain: "ensemble"
+    recon_mode: "incremental"
+    output_path: "outputs_semantic/scannetpp"
+
+checkpointing:
+  every_n_train_steps: 10000
+
+data_loader:
+  train:
+    batch_size: 1
+
+loss:
+  lpips:
+    apply_after_step: 0
+    weight: 0.05
+
+trainer:
+  max_steps: 300_001
+  num_sanity_val_steps: 0
+
+train:
+  depth_sup: true
+  depth_mode: depth
+  f_count: false
+  semantic_sup: true
+  semantic_sup_start: -1
+  semantic_sup_joint_start: 3000_000
+  stage: none
+
+test:
+  eval: false
+  stage: online
+
+strict: false

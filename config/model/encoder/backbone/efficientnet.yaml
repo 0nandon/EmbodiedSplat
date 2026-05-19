@@ -1,0 +1,5 @@
+name: efficientnet
+
+model: efficientnet
+d_out: 512
+resnet_name: resunet

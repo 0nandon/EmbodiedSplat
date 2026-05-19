@@ -1,0 +1,4 @@
+# ninja log v5
+2	7253	1751224982960202548	/data/sjlee/DiSR-NeRF/threestudio/systems/gaussian_splatting/submodules/simple-knn/build/temp.linux-x86_64-cpython-39/simple_knn.o	e3e9aebae2e33557
+1	10682	1751224986388520253	/data/sjlee/DiSR-NeRF/threestudio/systems/gaussian_splatting/submodules/simple-knn/build/temp.linux-x86_64-cpython-39/ext.o	2b436099aa3a792f
+2	35661	1751225011370835358	/data/sjlee/DiSR-NeRF/threestudio/systems/gaussian_splatting/submodules/simple-knn/build/temp.linux-x86_64-cpython-39/spatial.o	dfb85b18ce636e2f
