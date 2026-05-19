@@ -124,10 +124,10 @@ We provide evaluation scripts for diverse settings across ScanNet and ScanNet++,
 
 | Column 1 | EmbodiedSplat | EmbodiedSplat-*fast* |   |
 | -------- | -------- | -------- | - |
-| ScanNet    |    [Here](documents/embodiedsplat_scannet.md)      |     [Here](documents/embodiedsplat_fast_scannet.md)      |   |
-| ScanNet, GT Depth    |     [Here](documents/embodiedsplat_scannet_gtdepth.md)     |    [Here](documents/embodiedsplat_fast_scannet_gtdepth.md)      |   |
-| ScanNet++   |    [Here](documents/embodiedsplat_scannetpp.md)      |     [Here](documents/embodiedsplat_fast_scannetpp.md)     |   |
-| ScanNet++, GT Depth    |     [Here](documents/embodiedsplat_scannetpp_gtdepth.md)     |    [Here](documents/embodiedsplat_fast_scannetpp_gtdepth.md)      |   |
+| ScanNet    |    [Here](documents/embodiedsplat_scannet.md)      |     [Here](documents/embodiedsplat_fast_scannet.md)      |   
+| ScanNet, GT Depth    |     [Here](documents/embodiedsplat_scannet_gtdepth.md)     |    [Here](documents/embodiedsplat_fast_scannet_gtdepth.md)      |   
+| ScanNet++   |    [Here](documents/embodiedsplat_scannetpp.md)      |     [Here](documents/embodiedsplat_fast_scannetpp.md)     |   
+| ScanNet++, GT Depth    |     [Here](documents/embodiedsplat_scannetpp_gtdepth.md)     |    [Here](documents/embodiedsplat_fast_scannetpp_gtdepth.md)      |   
 
 Generated semantic Gaussians are stored in `outputs_semantic` folder and subsequently used for evaluation in point clouds.
 
