@@ -68,14 +68,14 @@ def compute_costmap_2d(gaussians, text_feat):
     costmap = feat_dict.float() @ text_feat.float().t()
 
     idx = GS.clip_features_2d["idx"][0, GS.valid[0], :]
-    idx = idx[:, :3]
+    idx = idx[:, :5]
     invalid = (idx != -1).sum(dim=-1) == 0.
 
     non_mask = idx == -1
     idx[non_mask] = 0.
 
     weights = GS.clip_features_2d["weight"][0, GS.valid[0], :]
-    weights = weights[:, :3]
+    weights = weights[:, :5]
     weights /= weights.sum(dim=-1, keepdim=True)
 
     costmap_sel = costmap[idx.int()]
