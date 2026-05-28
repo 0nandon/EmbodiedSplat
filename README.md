@@ -112,13 +112,15 @@ Once you run the above command, two folders must be produced:
 
 ## Evaluation
 
-**NOTE 📌** : We make a minor update to the inference strategy. As mentioned at the end of Sec. 7.2, we apply *floater removal* as a post-refinement step following FreeSplat++. In our original paper, Gaussians identified as floaters are also excluded from semantic prediction on point clouds in Eq. 11. However, we empirically find that this exclusion degrades semantic performance, even though floater removal clearly improves rendered RGB quality. Hence, in the released code, floater Gaussians are excluded only during RGB rendering, while they are still used for semantic prediction. As a result, the evaluation results may be higher than the numbers reported in the paper.
-
-**NOTE 📌** : We support two types of inference strategy:
-* `incremantal`: Among all past frames, we select the N=30 images with the smallest pose differences from the current frame and use them as reference frames.
-* `online`: Simply select the past *N*=30 frames, *i.e.*, [*t*−30,*t*−1], and use them as reference frames for timestep *t*.
-
-The dafault setting is `incremental`, but it can be changed to `online` by setting `model.encoder.recon_mode=online` in the config files under `config/experiment`. Both settings yield similar performance.
+> [!IMPORTANT]
+> **NOTE 📌** : We make a minor update to the inference strategy. As mentioned at the end of Sec. 7.2, we apply *floater removal* as a post-refinement step following FreeSplat++. In our original paper, Gaussians identified as floaters are also excluded from semantic prediction on point clouds in Eq. 11. However, we empirically find that this exclusion degrades semantic performance, even though floater removal clearly improves rendered RGB quality. Hence, in the released code, floater Gaussians are excluded only during RGB rendering, while they are still used for semantic prediction. As a result, the evaluation results may be higher than the numbers reported in the paper.
+> When you change the model, you must update `NUM_SEMANTIC_CHANNELS` in the config file.
+>
+> **NOTE 📌** : We support two types of inference strategy:
+>* `incremantal`: Among all past frames, we select the N=30 images with the smallest pose differences from the current frame and use them as reference frames.
+>* `online`: Simply select the past *N*=30 frames, *i.e.*, [*t*−30,*t*−1], and use them as reference frames for timestep *t*.
+> 
+>The dafault setting is `incremental`, but it can be changed to `online` by setting `model.encoder.recon_mode=online` in the config files under `config/experiment`. Both settings yield similar performance.
 
 We provide evaluation scripts for diverse settings across ScanNet and ScanNet++, with options to enable or disable GT depth. All the experiments are conducted in single NVIDIA RTX 6000 Ada GPU (48GB).
 
