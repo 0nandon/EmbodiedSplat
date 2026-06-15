@@ -357,7 +357,8 @@ class ModelWrapper(LightningModule):
 
     def training_step(self, batch, batch_idx):
         if self.train_cfg.stage == 'online':
-            torch.cuda.empty_cache()
+            pass
+            # torch.cuda.empty_cache()
         
         batch: BatchedExample = self.data_shim(batch)
         _, _, _, h, w = batch["target"]["image"].shape
