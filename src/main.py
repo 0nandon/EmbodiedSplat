@@ -53,10 +53,16 @@ def train(cfg_dict: DictConfig):
         print(cyan(f"Saving outputs to {output_dir}."))
         latest_run = output_dir.parents[1] / "latest-run"
     else:
-        output_dir = Path(f'outputs_rgb/{cfg.output_dir}')
-        os.makedirs(output_dir, exist_ok=True)
-        print(cyan(f"Saving outputs to {output_dir}."))
-        latest_run = Path("outputs_rgb") / "latest-run"
+        if cfg_dict.test.stage == 'none':
+            output_dir = Path(f'train_outputs/{cfg.output_dir}')
+            os.makedirs(output_dir, exist_ok=True)
+            print(cyan(f"Saving outputs to {output_dir}."))
+            latest_run = Path("train_outputs") / "latest-run"
+        else:
+            output_dir = Path(f'outputs_rgb/{cfg.output_dir}')
+            os.makedirs(output_dir, exist_ok=True)
+            print(cyan(f"Saving outputs to {output_dir}."))
+            latest_run = Path("outputs_rgb") / "latest-run"
 
     run = wandb.init(dir=output_dir)
     

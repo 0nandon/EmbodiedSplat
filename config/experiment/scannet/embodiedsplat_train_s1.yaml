@@ -1,0 +1,80 @@
+# @package _global_
+
+defaults:
+  - override /dataset: scannet_cost
+  - override /model/encoder: encoder_train_unet3d_single
+  - override /model/encoder/backbone: efficientnet
+  - override /loss: [semantic]
+
+wandb:
+  name: scannet
+  tags: [scannet, 384x512]
+
+dataset:
+  image_shape: [384, 512]
+  roots: [dataset/scannet]
+  near: 0.5
+  far: 15.
+  sample_num_start: 10
+  sample_num_end: 11
+  view_sampler:
+    num_context_views: 8
+    random: True
+  cache: cache
+
+model:
+  encoder:
+    n_levels: -1
+    num_views: 5
+    fusion: true
+    cv_type: cv
+    wo_matchnet: true
+    log_plane: true
+    num_depth_candidates: 128
+    low_res: true
+    refine_gs: true
+    refine_pp: true
+    fore_fusion: true
+    refine_window: 30
+    use_gt_depth: false
+    use_openscene: false
+    load_cache: true
+    clip_dim: 768
+    semantic_early_fusion: true
+    non_object_embedding: false
+    unet_3d: true
+    unet3d_arch: 'MinkUNet18A'
+    pcd_aug: true
+    voxel_size: 0.02
+    memory: true
+    memory_norm: "BN"
+
+checkpointing:
+  every_n_train_steps: 50000
+
+data_loader:
+  train:
+    batch_size: 1
+
+loss:
+  lpips:
+    apply_after_step: 0
+    weight: 0.05
+
+trainer:
+  max_steps: 50_001 # 300_001
+  num_sanity_val_steps: 0
+
+test:
+  stage: none
+
+train:
+  depth_sup: true
+  depth_mode: depth
+  f_count: false
+  semantic_sup: true
+  semantic_sup_start: -1
+  semantic_sup_joint_start: 3000_000
+  stage: single
+
+strict: false

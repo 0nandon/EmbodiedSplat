@@ -54,9 +54,11 @@ for Open-Vocabulary 3D Scene Understanding</h1>
 
 - [2026/02/21] EmbodiedSplat is accepted to CVPR 2026 🔥. The code will be released before June.
 - [2026/05/19] The code and pretrained weights are released! 👊🏻
+- [2026/06/14] Example training pipeline of EmbodiedSplat is released! 
 
 ## TODO
 - [x] Release the code of EmbodiedSplat and pretrained weights
+- [x] Release the training code of EmbodiedSplat
 - [ ] If time permits, we are planning to give some updates (Not for publishing another paper, but just for fun ☺️): 
     * Replacing the reconstruction backbone from FreeSplat++ to the most recent pose-free online 3DGS feed-forward model.
     * Replacing the CLIP(OpenSeg, MaskAdapter) + SAM pipeline into the more stronger 2D VLMs such as SAM3.
@@ -131,6 +133,19 @@ We provide evaluation scripts for diverse settings across ScanNet and ScanNet++,
 | ScanNet++, GT Depth    |     [Here](documents/embodiedsplat_scannetpp_gtdepth.md)     |    [Here](documents/embodiedsplat_fast_scannetpp_gtdepth.md)      |   
 
 Generated semantic Gaussians are stored in `outputs_semantic` folder and subsequently used for evaluation in point clouds.
+
+## Training
+
+> [!IMPORTANT]
+> **NOTE 📌** : You may read the text below to better understand our model.
+> 
+> * Our CLIP global codebook and Online Sparse Coefficient Field is a **training-free approcah** which stores 2D CLIP features in a memory-efficient manner. Theoretically, they can be adopted by any kinds of feed-forward 3DGS model where we use FreeSplat++ in the main paper.
+> 
+> * Since EmbodiedSplat-*fast* only uses 2D CLIP features, it doesn't require additional training. 
+> 
+> * Only 3D CLIP features in EmbodiedSplat require additional training where 2D CLIP is distilled to 3D U-Net with memory adapter. Combining 3D CLIP features show additional performance improvement which is also shown by OpenScene.
+
+If you want to train EmbodiedSplat for 3D CLIP features, please follow the [train.md](documents/train.md).
 
 ## Acknowledgement
 

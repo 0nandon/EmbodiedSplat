@@ -1,0 +1,78 @@
+defaults:
+  - backbone: resnet
+
+name: encoder_train_unet3d_single
+
+opacity_mapping:
+  initial: 0.0
+  final: 0.0
+  warm_up: 1
+
+num_monocular_samples: 32
+num_surfaces: 1
+predict_opacity: false
+near_disparity: 3.0
+
+gaussians_per_pixel: 3
+
+gaussian_adapter:
+  gaussian_scale_min: 0.5
+  gaussian_scale_max: 15.0
+  sh_degree: 2
+  depth_sup: true
+
+d_feature: 128
+
+epipolar_transformer:
+  self_attention:
+    patch_size: 4
+    num_octaves: 10
+    num_layers: 2
+    num_heads: 4
+    d_token: 128
+    d_dot: 128
+    d_mlp: 256
+  num_octaves: 10
+  num_layers: 2
+  num_heads: 4
+  num_samples: 32
+  d_dot: 128
+  d_mlp: 256
+  downscale: 4
+
+visualizer:
+  num_samples: 8
+  min_resolution: 256
+  export_ply: false
+
+apply_bounds_shim: true
+
+# Use this to ablate the epipolar transformer.
+use_epipolar_transformer: false
+
+use_transmittance: false
+
+use_depth: false
+
+est_depth: "cost"
+
+use_semantic_fusion: True
+fastsam_model_path: "pretrained/FastSAM-x.pt"
+fastsam_retina_masks: True
+fastsam_conf: 0.4
+fastsam_iou: 0.9
+clip_model: 'ViT-B/32'
+
+unet3d_in_channels: 64
+unet3d_out_channels: 64
+unet3d_D: 3
+unet3d_arch: 'MinkUNet14A'
+voxel_size: 0.02
+
+memory: false
+memory_in_channels: [32, 64, 128, 256]
+memory_queue: -1
+memory_vmp_layer: [0, 1, 2, 3]
+
+unet_3d: false
+pcd_aug: false

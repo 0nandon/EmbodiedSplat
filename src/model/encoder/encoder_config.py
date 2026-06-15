@@ -19,6 +19,8 @@ class EncoderEpipolarCfg:
     name: Literal[
       "epipolar",
       "encoder_test_unet3d_online",
+      "encoder_train_unet3d_single",
+      "encoder_train_unet3d_online"
     ]
     d_feature: int
     num_monocular_samples: int
