@@ -1,380 +1,549 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
-  });
-  </script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
-  
-  <meta charset="utf-8">
-  <meta name="description"
-        content="EmbodiedSplat: Online Feed-Forward Semantic 3DGS for Open-Vocabulary Scene Understanding">
-  <meta name="keywords" content="Events Camera, Scene Understanding">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="EmbodiedSplat: Online Feed-Forward Semantic 3DGS for Open-Vocabulary Scene Understanding">
+  <meta name="keywords" content="3D Gaussian Splatting, Scene Understanding, Embodied AI, CVPR 2026">
   <title>EmbodiedSplat</title>
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-
+    function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-PYVRSFMDRL');
   </script>
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
+  <!-- MathJax -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML" async></script>
 
-  <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/chorus-style.css">
   <link rel="icon" href="./static/images/icon.png">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
 </head>
 <body>
 
-<section class="hero">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <div class="has-text-centered" style="margin-bottom: -1rem;" style="margin-top: -10rem;">
-          <img src="static/images/logo_white_v2.png"
-           alt="EmbodiedSplat logo"
-           style="max-height: 300px; width: auto;">
-          </div>
-            <p class="title is-3 publication-title">EmbodiedSplat 🛋️: Online Feed-Forward Semantic 3DGS <br> for Open-Vocabulary 3D Scene Understanding<br></p>
-          <h1 class="title is-4"><strong class="venue-glow">CVPR 2026</strong></h1>
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              <a href="https://www.linkedin.com/in/seungjun-lee-43101a261/">Seungjun Lee</a>,</span>
-            <span class="author-block">
-              <a href="https://scholar.google.com/citations?user=7rf6Bw4AAAAJ&hl=en">Zihan Wang</a>,</span>
-            <span class="author-block">
-              <a href="https://wangys16.github.io">Yunsong Wang</a>,</span>
-            <span class="author-block">
-              <a href="https://www.comp.nus.edu.sg/~leegh/">Gim Hee Lee</a>
-            </span>
-          </div>
+  <!-- ── Topbar ─────────────────────────────────────────────── -->
+  <header class="topbar" id="topbar">
+    <a class="brand" href="#hero" aria-label="EmbodiedSplat home">
+      <img src="static/images/icon.png" alt="" />
+      <span>EmbodiedSplat</span>
+    </a>
+    <nav class="topnav" aria-label="Page sections">
+      <a href="#info"          class="toc-link">Title</a>
+      <a href="#abstract"      class="toc-link">TLDR</a>
+      <a href="#contributions" class="toc-link">Contributions</a>
+      <a href="#method"        class="toc-link">Method</a>
+      <a href="#demo"          class="toc-link">Demo</a>
+      <a href="#results"       class="toc-link">Results</a>
+      <a href="#BibTeX"        class="toc-link">BibTeX</a>
+    </nav>
+  </header>
 
-          <div class="is-size-5 publication-authors">
-            <span class="author-block" style="margin-right: 1em;">National University of Singapore</span><br>
-          </div>
+  <!-- ── Hero (full-screen video) ──────────────────────────── -->
+  <section class="hero" id="hero" aria-label="EmbodiedSplat scene showcase">
+    <div class="hero-media">
+      <video class="hero-video is-active" autoplay muted playsinline loop preload="none"
+        data-src="./static/images/teaser/teaser_1.MOV"></video>
+      <video class="hero-video" autoplay muted playsinline loop preload="none"
+        data-src="./static/images/teaser/teaser_2.MOV"></video>
+      <video class="hero-video" autoplay muted playsinline loop preload="none"
+        data-src="./static/images/teaser/teaser_5.MOV"></video>
+      <video class="hero-video" autoplay muted playsinline loop preload="none"
+        data-src="./static/images/teaser/teaser_3.MOV"></video>
+      <video class="hero-video" autoplay muted playsinline loop preload="none"
+        data-src="./static/images/teaser/teaser_4.MOV"></video>
+    </div>
+    <div class="hero-shade"></div>
+    <div class="hero-switcher" aria-label="Hero video selector">
+      <button class="hero-tab is-active" type="button" data-hero-index="0">I wanna hear the music.</button>
+      <button class="hero-tab" type="button" data-hero-index="1">I wanna pee.</button>
+      <button class="hero-tab" type="button" data-hero-index="2">Microwave</button>
+      <button class="hero-tab" type="button" data-hero-index="3">Carpet</button>
+      <button class="hero-tab" type="button" data-hero-index="4">Bag</button>
+    </div>
+  </section>
 
-          <div class="column has-text-centered">
-            <div class="publication-links">
-              <!-- PDF Link. -->
-              <span class="link-block">
-                <a href="https://openaccess.thecvf.com/content/CVPR2026/html/Lee_EmbodiedSplat_Online_Feed-Forward_Semantic_3DGS_for_Open-Vocabulary_3D_Scene_Understanding_CVPR_2026_paper.html"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper (High Quality Figure)</span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href="https://arxiv.org/abs/2603.04254"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
-              <!-- Code Link. -->
-              <span class="link-block">
-                <a href="https://github.com/0nandon/EmbodiedSplat"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code</span>
-                  </a>
-              </span>
-              <!-- Hugging Face Link. -->
-              <span class="link-block">
-                <a href="https://huggingface.co/datasets/onandon/EmbodiedSplat"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <img src="https://cdn.simpleicons.org/huggingface" alt="Hugging Face" width="18">
-                  </span>
-                  <span>Hugging Face</span>
-                  </a>
-              </span>
-              <br>
-              <!-- Poster Link. -->
-              <span class="link-block">
-                <a href="https://cvpr.thecvf.com/media/cvpr-2026/Slides/38273_uAz9EmT.pdf"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="fas fa-palette"></i>
-                  </span>
-                  <span>Poster</span>
-                  </a>
-              </span>
-              <!-- Post Link. -->
-              <span class="link-block">
-                <a href="https://www.linkedin.com/posts/seungjun-lee-43101a261_computervision-sceneunderstanding-embodiedai-ugcPost-7464607589029302272-of4l/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEBApuUB-sdUqwNz128i7T1n_54pkDMbNfM"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-linkedin"></i>
-                  </span>
-                  <span>Post</span>
-                  </a>
-              </span>
-              <!-- Conference Link. -->
-              <span class="link-block">
-                <a href="https://cvpr.thecvf.com/virtual/2026/poster/38273"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-calendar-alt"></i>
-                  </span>
-                  <span>CVPR 2026</span>
-                  </a>
-              </span>
+  <!-- ── Page content ───────────────────────────────────────── -->
+  <div class="page">
+
+    <!-- Info ─────────────────────────────────────────────────── -->
+    <section class="section project-info" id="info">
+      <h2>EmbodiedSplat 🛋️: Online Feed-Forward Semantic 3DGS<br>for Open-Vocabulary 3D Scene Understanding</h2>
+      <p class="presentation">CVPR 2026</p>
+
+      <div class="link-row" aria-label="Project links">
+        <a class="pill-link"
+           href="https://openaccess.thecvf.com/content/CVPR2026/html/Lee_EmbodiedSplat_Online_Feed-Forward_Semantic_3DGS_for_Open-Vocabulary_3D_Scene_Understanding_CVPR_2026_paper.html"
+           target="_blank" rel="noopener noreferrer">
+          <span class="link-icon" aria-hidden="true"><i class="fas fa-file-pdf"></i></span>
+          <span>Paper</span>
+        </a>
+        <a class="pill-link"
+           href="https://arxiv.org/abs/2603.04254"
+           target="_blank" rel="noopener noreferrer">
+          <span class="link-icon" aria-hidden="true"><i class="ai ai-arxiv"></i></span>
+          <span>arXiv</span>
+        </a>
+        <a class="pill-link"
+           href="https://github.com/0nandon/EmbodiedSplat"
+           target="_blank" rel="noopener noreferrer">
+          <span class="link-icon github-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path fill="currentColor" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.88-2.78.62-3.37-1.22-3.37-1.22-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.35 1.12 2.92.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.35 9.35 0 0 1 12 7c.85 0 1.7.12 2.5.34 1.9-1.33 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.38-.01 2.49-.01 2.83 0 .27.18.59.69.49A10.25 10.25 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"/>
+            </svg>
+          </span>
+          <span>Code</span>
+        </a>
+        <a class="pill-link"
+           href="https://huggingface.co/datasets/onandon/EmbodiedSplat"
+           target="_blank" rel="noopener noreferrer">
+          <span class="link-icon hf-icon" aria-hidden="true">
+            <img src="https://cdn.simpleicons.org/huggingface" alt="">
+          </span>
+          <span>HuggingFace</span>
+        </a>
+        <a class="pill-link"
+           href="https://cvpr.thecvf.com/media/cvpr-2026/Slides/38273_uAz9EmT.pdf"
+           target="_blank" rel="noopener noreferrer">
+          <span class="link-icon" aria-hidden="true"><i class="fas fa-palette"></i></span>
+          <span>Poster</span>
+        </a>
+        <a class="pill-link"
+           href="https://www.linkedin.com/posts/seungjun-lee-43101a261_computervision-sceneunderstanding-embodiedai-ugcPost-7464607589029302272-of4l/"
+           target="_blank" rel="noopener noreferrer">
+          <span class="link-icon" aria-hidden="true"><i class="fab fa-linkedin"></i></span>
+          <span>Post</span>
+        </a>
+        <a class="pill-link"
+           href="https://cvpr.thecvf.com/virtual/2026/poster/38273"
+           target="_blank" rel="noopener noreferrer">
+          <span class="link-icon" aria-hidden="true"><i class="fas fa-calendar-alt"></i></span>
+          <span>CVPR 2026</span>
+        </a>
+      </div>
+
+      <p class="authors">
+        <a href="https://www.linkedin.com/in/seungjun-lee-43101a261/" target="_blank" rel="noopener noreferrer">Seungjun Lee</a>,
+        <a href="https://scholar.google.com/citations?user=7rf6Bw4AAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Zihan Wang</a>,
+        <a href="https://wangys16.github.io" target="_blank" rel="noopener noreferrer">Yunsong Wang</a>,
+        <a href="https://www.comp.nus.edu.sg/~leegh/" target="_blank" rel="noopener noreferrer">Gim Hee Lee</a>
+      </p>
+      <p class="institutions">National University of Singapore</p>
+    </section>
+
+    <!-- Abstract ─────────────────────────────────────────────── -->
+    <section class="section" id="abstract">
+      <p class="eyebrow">TLDR</p>
+      <h2>Build and Understand the 3D at Once</h2>
+
+      <figure class="paper-figure">
+        <img src="static/images/teaser/teaser_drawio.png"
+             alt="EmbodiedSplat teaser: online whole-scene semantic 3DGS reconstruction"
+             loading="lazy" decoding="async">
+      </figure>
+
+      <p class="section-lead">
+        <strong style="color:#216d68;">Build and understand at once!</strong>
+        By taking over 300 streaming images, EmbodiedSplat reconstructs whole-scene open-vocabulary 3DGS in an online manner at up to <strong>5–6 FPS</strong>
+        per-frame processing time. The reconstructed scene supports diverse perception
+        tasks: open-vocabulary 3D semantic segmentation, 2D-rendered semantic
+        segmentation, and novel-view color synthesis with depth rendering.
+      </p>
+
+      <div class="tldr">
+        Understanding a 3D scene immediately during exploration is essential for
+        embodied tasks — the agent must construct and comprehend the 3D scene <strong style="color:#d85d4c;">online</strong>
+        and in <strong style="color:#d85d4c;">near real-time</strong>. Unlike existing semantic 3DGS which are restricted to offline
+        or per-scene optimization, our <strong style="color:#5c66f0;">EmbodiedSplat</strong> enables simultaneous online 3DGS
+        reconstruction and semantic understanding from streaming images with feed-forward design.
+      </div>
+    </section>
+
+    <!-- Contributions ────────────────────────────────────────── -->
+    <section class="section" id="contributions">
+      <p class="eyebrow">Motivation</p>
+      <h2>Existing semantic 3DGS are not suitable for Embodied agents</h2>
+      <p class="section-lead">
+        3D perception module for embodied agents should fulfill the 5 conditions.
+
+        <ul style="list-style: none; padding-left: 0; margin: 14px 0; display: flex; flex-direction: column; gap: 6px;">
+          <li style="display: flex; align-items: baseline; gap: 8px; color: #596862;"><span style="color: #d85d4c; font-weight: 700; flex-shrink: 0;">① Online Reconstruction</span></li>
+          <li style="display: flex; align-items: baseline; gap: 8px; color: #596862;"><span style="color: #d85d4c; font-weight: 700; flex-shrink: 0;">② Real-time Inference</span></li>
+          <li style="display: flex; align-items: baseline; gap: 8px; color: #596862;"><span style="color: #d85d4c; font-weight: 700; flex-shrink: 0;">③ Highly-generalizable to novel scene</span></li>
+          <li style="display: flex; align-items: baseline; gap: 8px; color: #596862;"><span style="color: #d85d4c; font-weight: 700; flex-shrink: 0;">④ Whole-scene Understanding</span></li>
+          <li style="display: flex; align-items: baseline; gap: 8px; color: #596862;"><span style="color: #d85d4c; font-weight: 700; flex-shrink: 0;">⑤ Open-vocabulary Understanding</span></li>
+        </ul>
+      </p>
+      <p class="section-lead">
+        However, existing semantic 3DGS methods are not applicable to embodied scenarios because:
+      </p>
+
+      <div class="motivation-grid">
+        <article class="motivation-card">
+          <span>Per-scene Optimization</span>
+          <p>Per-scene optimization methods such as LangSplat, OpenGaussian, Dr. Splat and InstanceGaussian
+            <strong>cannot be generalized</strong> to novel scenes without additional optimization.
+          </p>
+        </article>
+        <article class="motivation-card">
+          <span>Offline</span>
+          <p>Feed-forward methods such as LSM and SIU3R propose language-embedded feed-forward semantic 3DGS.
+            However, they are restricted to <strong>offline setting</strong> and only address <strong>only two or a few input views</strong>.
+          </p>
+        </article>
+        <article class="motivation-card">
+          <span>Sub-optimal CLIP Compressor</span>
+          <p> Auto-encoder / decoder from LangSplat or PQ-Index from Dr. Splat both 
+            require an <strong>additional pretraining stage</strong> and suffer from <strong>severe information loss</strong> due to dimensionality reduction.
+            Per-scene optimized codebook from OpenGaussian or InstanceGaussian <strong>can't be adopted to generalizable setting</strong>.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Contributions ────────────────────────────────────────── -->
+    <section class="section" id="contributions">
+      <p class="eyebrow">Contributions</p>
+      <h2>Dont worry, EmbodiedSplat is here</h2>
+      <p class="section-lead">
+        Building on top of pretrained feed-forward 3DGS model (FreeSplat++), 
+        we propose the 3DGS-based perception model designed for embodied scenarios where the model
+        supports online semantic 3DGS reconstruction in near real-time.
+      </p>
+      <br>
+      <h3>How to store per-Gaussian CLIP features in memory efficient manner?</h3>
+      <p class="section-lead">
+        One of the key innovations of EmbodiedSplat lies in its memory-efficient representation of per-Gaussian CLIP features.
+        We propose novel <strong style="color:#5c66f0;">Online Sparse Coefficient Field</strong> with <strong style="color:#5c66f0;">CLIP global codebook</strong> which offers several advantages over
+        existing CLIP compressors:
+        <ul style="list-style: none; padding-left: 0; margin: 14px 0; display: flex; flex-direction: column; gap: 6px;">
+          <li style="display: flex; align-items: baseline; gap: 8px; color: #596862;"><span style="color: #d85d4c; font-weight: 700; flex-shrink: 0;">① Training free:</span> It doesn't require pretraining unlike Auto-encoder /decoder (LangSplat) or PQ-Index (Dr. Splat).</li>
+          <li style="display: flex; align-items: baseline; gap: 8px; color: #596862;"><span style="color: #d85d4c; font-weight: 700; flex-shrink: 0;">② No information loss:</span> We preserve full semantics of CLIP with no dimensionality reduction.</li>
+          <li style="display: flex; align-items: baseline; gap: 8px; color: #596862;"><span style="color: #d85d4c; font-weight: 700; flex-shrink: 0;">③ Highly generalizable:</span> Index and Codebook is constructed on the fly without any per-scene optimization.</li>
+          <li style="display: flex; align-items: baseline; gap: 8px; color: #596862;"><span style="color: #d85d4c; font-weight: 700; flex-shrink: 0;">④ Online updates:</span> The index and codebook are updated online whenever a new observation arrives.</li>
+          <li style="display: flex; align-items: baseline; gap: 8px; color: #596862;"><span style="color: #d85d4c; font-weight: 700; flex-shrink: 0;">⑤ Fast 3D Search:</span> We reuse constructed index and codebook to enable fast 3D search based on user's text prompt.</li>
+        </ul>
+      </p>
+      <br>
+      <h3>2D CLIP features lack 3D geometry prior</h3>
+      <p class="section-lead">
+        CLIP features derived from 2D images exhibit strong open-vocabulary capability while lacking the 3D geometry prior.
+        Therefore, we complement <strong style="color:#5c66f0;">3D CLIP features</strong> which are produced by aggregating the feature point cloud of 3DGS through 3D U-Net and
+        temporal-aware memory adapter. Both using 2D and 3D CLIP features enables mutual compensation where 2D features offer
+        strong semantic capability while 3D features complement 3D geometry prior.
+      </p>
+      <p class="section-lead">
+        Overall, our contributions are three-fold:
+      </p>
+
+      <div class="motivation-grid">
+        <article class="motivation-card">
+          <span>Online Feed-forward Semantic 3DGS</span>
+          <p>Novel framework enabling <em>online, whole-scene</em> reconstruction
+          for language-embedded 3DGS with up to <strong>5–6 FPS</strong>
+          inference speed — the first feed-forward approach at this scale.</p>
+        </article>
+        <article class="motivation-card">
+          <span>Online Sparse Coefficient Field</span>
+          <p><em>Sparse Coefficient Field</em> with a <em>CLIP Global Codebook</em>
+            stores per-Gaussian language embeddings compactly while preserving the
+            full semantic generalizability of CLIP.</p>
+        </article>
+        <article class="motivation-card">
+          <span>2D CLIP + 3D CLIP</span>
+          <p>Combination of <em>2D CLIP Features</em> with rich semantic
+            capabilities and <em>3D CLIP Features</em> with geometric prior,
+            enabling mutual compensation between semantics and 3D geometry.</p>
+        </article>
+      </div>
+
+      <div class="motivation-takeaway" aria-label="EmbodiedSplat highlights">
+        <span>Online 3DGS reconstruction</span>
+        <span>RGB + semantic at the same time</span>
+        <span>Digest > 300 images</span>
+        <span>Near real-time inference (5–6 FPS)</span>
+        <span>Open-vocabulary understanding</span>
+        <span>Feed-forward design</span>
+        <span>Memory efficient CLIP binding →&nbsp;<strong style="color:#d85d4c;">But no information loss</strong>,&nbsp;<strong style="color:#d85d4c;"> no pretraining</strong></span>
+      </div>
+    </section>
+
+    <!-- Demo ─────────────────────────────────────────────────── -->
+    <section class="section" id="demo">
+      <p class="eyebrow">Video Demo</p>
+      <h2>Check our demo video</h2>
+      <p class="section-lead">
+        Enjoy the visualization of our online 3DGS reconstruction with language embeddings.
+      </p>
+
+      <div class="demo-video-row">
+        <figure class="demo-video-card">
+          <video loop muted playsinline>
+            <source src="https://huggingface.co/datasets/onandon/EmbodiedSplat/resolve/main/demo.MP4" type="video/mp4">
+          </video>
+          <div class="video-overlay-icon" aria-hidden="true">
+            <svg class="icon-play"  viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6zm8-14v14h4V5z"/></svg>
+          </div>
+          <div class="video-progress" role="slider" aria-label="Video progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div class="video-progress-fill">
+              <span class="video-progress-thumb"></span>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+          <figcaption class="video-caption">Online 3DGS Reconstruction</figcaption>
+        </figure>
 
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <div class="columns is-centered">
-      <div class="column">
-        <div class="content"> 
-          <img src="static/images/teaser/teaser.png" class="interpolation-image">
-        </div>
-      </div>
-      </div>
-      <br>
-      <h2 class="subtitle has-text-centered" style="margin-bottom: 0rem; margin-top: -2rem;">
-      <div class="content has-text-justified">
-      <strong><span style="color:#5c66f0;">Build and understand at Once!</span></strong> By taking over 300 streaming images, our <span class="inline-wordmark" data-text="EmbodiedSplat">EmbodiedSplat</span> reconstructs whole-scene open-vocabulary 3DGS in online manner at up to 5-6 FPS per-frame processing time. Reconstructed scene supports diverse perception tasks such as open-vocabulary 3D semantic segmentation, 2D-rendered semantic segmentation and novel-view color synthesis with depth rendering.
-      </div>
-      </h2>
-    </div>
-  </div>
-
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <div class="columns is-centered teaser-video-pair">
-        <div class="column">
-          <div class="content">
-            <div class="video-hover">
-            <video autoplay loop muted playsinline>
-              <source src="https://huggingface.co/datasets/onandon/EmbodiedSplat/resolve/main/demo.MP4" type="video/mp4">
-              </video></div>
-              <center>
-              <div style="margin-top: 0.5rem;"><p>
-                <i>DEMO video.</i>
-              </p></div>
-            </center>
+        <figure class="demo-video-card">
+          <video loop muted playsinline>
+            <source src="./static/images/teaser/teaser.mov" type="video/mp4">
+          </video>
+          <div class="video-overlay-icon" aria-hidden="true">
+            <svg class="icon-play"  viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6zm8-14v14h4V5z"/></svg>
           </div>
-        </div>
+          <div class="video-progress" role="slider" aria-label="Video progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div class="video-progress-fill">
+              <span class="video-progress-thumb"></span>
+            </div>
+          </div>
+          <figcaption class="video-caption">BEV View</figcaption>
+        </figure>
+      </div>
+    </section>
 
-        <div class="column">
-          <div class="content">
-            <div class="video-hover">
-            <video autoplay loop muted playsinline>
-              <source src="./static/images/teaser/teaser.mov" type="video/mp4">
-              </video></div>
-              <center>
-              <div style="margin-top: 0.5rem;"><p>
-                <i>BEV video for whole-scene reconstruction.</i>
-              </p></div>
-            </center>
+    <!-- Results ──────────────────────────────────────────────── -->
+    <section class="section" id="results">
+      <p class="eyebrow">Interactive Demo</p>
+      <h2>Interact with the reconstructed 3DGS</h2>
+      <p class="section-lead">
+        Loading may take a moment — the 3DGS file is large.
+      </p>
+
+      <div class="viewer-stage">
+        <div class="viewer-placeholder">
+          <div>
+            <p class="viewer-kicker">Interactive 3DGS Viewer</p>
+            <a href="./splat/index.html" class="load-viewer-button">Launch Viewer</a>
+            <p class="viewer-note">Loading may take a moment — the 3DGS file is large.</p>
           </div>
         </div>
       </div>
-      <br>
-      <h2 class="subtitle has-text-centered" style="margin-bottom: 2rem; margin-top: -2rem;">
-      <div class="content has-text-justified">
-      💡 Our EmbodiedSplat simultaneously constructs RGB and open-vocabulary semantic field in online manner. During the exploration, it even refines the part with noisy semantic by exploiting our novel Online Sparse Coefficient Field with CLIP Global Codebook.
-      </div>
-      </h2>
-    </div>
-  </div>
+    </section>
 
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <div class="columns is-centered">
+    <!-- Method ───────────────────────────────────────────────── -->
+    <section class="section" id="method">
+      <p class="eyebrow">Method</p>
+      <h2>Overall Framework of EmbodiedSplat</h2>
+      <p class="section-lead">
+        We endow feed-forward 3DGS with semantic understanding by binding two types
+        of CLIP features:
+        <strong style="color:#d85d4c;">① 2D Semantic Features</strong> — attached
+        to each Gaussian via the Sparse Coefficient Field with CLIP Global Codebook,
+        reducing memory while preserving CLIP generalizability; and
+        <strong style="color:#d85d4c;">② 3D Geometric-aware Features</strong> —
+        produced by aggregating the feature point cloud of 3DGS through a 3D U-Net
+        and temporal-aware memory adapter. Their mutual compensation yields
+        superior understanding over existing baselines.
+      </p>
 
-      <!-- Affordances 1 -->
-      <div class="column">
-        <div class="content">
-          <div class="video-hover">
-          <video autoplay loop muted>
-                <source src="./static/images/teaser/guitar.mov" type="video/mp4">
-            </video></div>
-            <center>
-            <div style="margin-top: 0.5rem;"><p>
-              <i>I wanna hear the music.</i>
-            </p></div>
-          </center>
-        </div>
-      </div>
-      <div class="column">
-        <div class="content"> 
-          <div class="video-hover">
-          <video autoplay loop muted>
-                <source src="./static/images/teaser/toilet.mov" type="video/mp4">
-            </video></div>
-            <center>
-            <div style="margin-top: 0.5rem;"><p>
-              <i>I wanna pee.</i>
-            </p></div>
-          </center>
-        </div>
-      </div>
-      <div class="column">
-        <div class="content">
-          <div class="video-hover">
-          <video autoplay loop muted>
-                <source src="./static/images/teaser/chair.mov" type="video/mp4">
-            </video></div>
-            <center>
-            <div style="margin-top: 0.5rem;"><p>
-              <i>Where can I sit?</i>
-            </p></div>
-          </center>
-        </div>
-      </div>
-      </div>
-      <br>
-      <h2 class="subtitle has-text-centered" style="margin-top: -2rem;">
-     💡 Our EmbodiedSplat can localize the 3D objects based on the free-form language along its exploration. 
-    </h2>
-      <h2 class="subtitle has-text-centered interact-callout-wrap" style="margin-top: 6rem;">
-        <a href="./splat/index.html" class="interact-callout">Interact with reconstructed 3D scene!</a>
-    </h2>
-    <div class="columns is-centered has-text-centered">
-    <div class="content has-text-justified has-text-centered">This will take a while since 3DGS file is huge.</div>
-    </div>
-    </div>
-  </div>
-</section>
+      <figure class="paper-figure pipeline-figure">
+        <img src="static/images/overall.png"
+             alt="EmbodiedSplat overall framework diagram"
+             loading="lazy" decoding="async">
+      </figure>
+    </section>
 
-<section class="section">
-  <div class="container is-max-desktop">
-    <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          Understanding a 3D scene immediately with its exploration is essential for embodied tasks, where an agent must construct and comprehend the 3D scene in an online and nearly real-time manner. In this study, we propose EmbodiedSplat, an online feed-forward 3DGS for open-vocabulary scene understanding that enables simultaneous online 3D reconstruction and 3D semantic understanding from the streaming images. Unlike existing open-vocabulary 3DGS methods which are typically restricted to either offline or per-scene optimization setting, our objectives are two-fold: <strong><span style="color:#df6950;">1)</span></strong> Reconstructs the semantic-embedded 3DGS of the entire scene from over 300 streaming images in an online manner. <strong><span style="color:#df6950;">2)</span></strong> Highly generalizable to novel scenes with feed-forward design and supports nearly real-time 3D semantic reconstruction when combined with real-time 2D models. To achieve these objectives, we propose an Online Sparse Coefficients Field with a CLIP Global Codebook where it binds the 2D CLIP embeddings to each 3D Gaussian while minimizing memory consumption and preserving the full semantic generalizability of CLIP. Furthermore, we generate 3D geometric-aware CLIP features by aggregating the partial point cloud of 3DGS through 3D U-Net to compensate the 3D geometric prior to 2D-oriented language embeddings. Extensive experiments on diverse indoor datasets, including ScanNet, ScanNet++, and Replica, demonstrate both the effectiveness and efficiency of our method. Code will be publicly available on project website.
-
-          <br><br>
-          💡 Most of the semantic 3DGS works leverage 2D rendering function to distill/bind language embeddings to 3DGS. <strong><span style="color:#5c66f0;">We don't!</span></strong> <br><br>
-          💡 Instead, we propose clearly distinct yet creative strategy called <strong><span style="color:#df6950;">Online Sparse Coefficient Field</span></strong> and <strong><span style="color:#df6950;">CLIP Global Codebook</span></strong> to bind language embeddings while minimizing the memory consumption and not losing semantic capability of 2D VLM.
-        </div>
-      </div>
-    </div>
-    <!--/ Abstract. -->
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Contributions</h2>
-      <br>
-        <div class="content has-text-justified" style="margin-top: -2rem;">
-          <ol>
-            <li>Novel framework for embodied 3D perception which enables <strong><span style="color:#51b18d;"><i>online, whole-scene</i></span></strong> reconstruction for <strong><span style="color:#51b18d;"><i>language-embedded 3DGS</i></span></strong> with up to <strong><span style="color:#51b18d;"><i>5-6 FPS</i></span></strong> inference speed.</li>
-            <li>Combination of <strong><span style="color:#51b18d;"><i>2D CLIP Features</i></span></strong> with rich semantic capabilities and <strong><span style="color:#51b18d;"><i>3D CLIP Features</i></span></strong> with geometric prior.</li>
-            <li><strong><span style="color:#51b18d;"><i>Sparse Coefficient Field</i></span></strong> with <strong><span style="color:#51b18d;"><i>CLIP Global Codebook</i></span></strong> to store the per-Gaussian language embeddings compactly.</li>
-            <li>Experiment results show that our framework significantly surpasses the existing semantic 3DGS in terms of segmentation performance and scene reconstruction time.</li>
-          </ol>
-        </div>
-      </div>
-    </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-       
-        <h2 class="title is-3">Overall Framework of EmbodiedSplat</h2>
-    
-      <br>
-        <div class="content has-text-justified" style="margin-top: -1rem;">
-          <p><strong><span style="color:#5c66f0;">Overall framework of EmbodiedSplat.</span></strong> We endow feed-forward 3DGS with semantic understanding capabilities by binding the two types of CLIP features: <strong><span style="color:#df6950;">1) 2D Semantic Features</span></strong> are attached to each Gaussian via <strong><span style="color:#51b18d;"><i>Sparse Coefficient Field</i></span></strong> with <strong><span style="color:#51b18d;"><i>CLIP Global Codebook</i></span></strong>, effectively reducing memory consumption while preserving semantic generalizability of CLIP. <strong><span style="color:#df6950;">2) 3D Geometric-aware Features</span></strong> are produced by aggregating the feature point cloud of 3DGS through 3D U-Net and temporal-aware memory adapter. These two types of features enable mutual compensation between semantic and 3D geometry, which results in superior understanding capabilities compared to the existing baselines.
-        </div>
-      </div>
-    </div>
-
-    <div class="column">
-        <div class="content">
-          <img src="static/images/overall.png"
-            class="interpolation-image">
-        </div>
-      </div>
-</section>
-
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h2 class="title">BibTeX</h2>
-    <pre><code>@article{lee2026embodiedsplat,
-  title={EmbodiedSplat: Online Feed-Forward Semantic 3DGS for Open-Vocabulary 3D Scene Understanding},
-  author={Lee, Seungjun and Wang, Zihan and Wang, Yunsong and Lee, Gim Hee},
-  journal={arXiv preprint arXiv:2603.04254},
-  year={2026}
+    <!-- BibTeX ───────────────────────────────────────────────── -->
+    <section class="section" id="BibTeX">
+      <p class="eyebrow">Citation</p>
+      <h2>BibTeX</h2>
+      <div class="bibtex-container">
+        <pre><code>@article{lee2026embodiedsplat,
+  title   = {EmbodiedSplat: Online Feed-Forward Semantic 3DGS for
+             Open-Vocabulary 3D Scene Understanding},
+  author  = {Lee, Seungjun and Wang, Zihan and Wang, Yunsong and Lee, Gim Hee},
+  journal = {arXiv preprint arXiv:2603.04254},
+  year    = {2026}
 }</code></pre>
-  </div>
-</section>
-
-
-<footer class="footer">
-  <div class="container">
-    <div class="content has-text-centered">
-      <a class="icon-link"
-         href="">
-        <i class="fas fa-file-pdf"></i>
-      </a>
-      <a class="icon-link" href="" class="external-link" disabled>
-        <i class="fab fa-github"></i>
-      </a>
-    </div>
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-          <p>
-            This website is licensed under a <a rel="license"
-                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
-          <p>
-            It borrows the source code of <a href="https://github.com/nerfies/nerfies.github.io">this website</a>.
-            We would like to thank Utkarsh Sinha and Keunhong Park.
-          </p>
-        </div>
       </div>
-    </div>
-  </div>
-</footer>
+    </section>
+
+  </div><!-- /.page -->
+
+  <!-- ── Footer ─────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>
+      This website is licensed under a
+      <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">
+        Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+      It borrows the source code of
+      <a href="https://github.com/nerfies/nerfies.github.io" target="_blank" rel="noopener noreferrer">
+        this website</a>.
+      We thank Utkarsh Sinha and Keunhong Park.
+    </p>
+  </footer>
+
+  <!-- ── Scripts ────────────────────────────────────────────── -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* ── 1. Hero video switcher ── */
+      var heroVideos = document.querySelectorAll('.hero-video');
+      var heroTabs   = document.querySelectorAll('.hero-tab');
+
+      function loadHeroVideo(video) {
+        if (!video.src && video.dataset.src) {
+          video.src = video.dataset.src;
+          video.load();
+        }
+      }
+
+      // load first video immediately
+      if (heroVideos[0]) loadHeroVideo(heroVideos[0]);
+      heroVideos[0] && heroVideos[0].play().catch(function(){});
+
+      heroTabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          var idx = parseInt(tab.dataset.heroIndex, 10);
+          heroVideos.forEach(function (v, i) {
+            var active = i === idx;
+            v.classList.toggle('is-active', active);
+            if (active) { loadHeroVideo(v); v.play().catch(function(){}); }
+            else v.pause();
+          });
+          heroTabs.forEach(function (t) {
+            t.classList.toggle('is-active', t === tab);
+          });
+        });
+      });
+
+      /* ── 2. Topbar: appear after hero ── */
+      var topbar = document.getElementById('topbar');
+      var hero   = document.getElementById('hero');
+
+      function updateTopbar() {
+        if (!topbar || !hero) return;
+        var past = hero.getBoundingClientRect().bottom <= 0;
+        topbar.classList.toggle('is-visible',  past);
+        topbar.classList.toggle('is-scrolled', window.scrollY > 120);
+      }
+
+      window.addEventListener('scroll', updateTopbar, { passive: true });
+      updateTopbar();
+
+      /* ── 3. Active TOC link ── */
+      var sectionIds = ['info','abstract','contributions','method','demo','results','BibTeX'];
+      var tocLinks   = document.querySelectorAll('.toc-link');
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            tocLinks.forEach(function (a) {
+              a.classList.toggle('is-active', a.getAttribute('href') === '#' + entry.target.id);
+            });
+          }
+        });
+      }, { rootMargin: '-20% 0px -65% 0px' });
+
+      sectionIds.forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+
+      /* ── 4. Demo videos: progress bar + play/pause (all cards) ── */
+      var activeDrag = null;
+
+      function initVideoCard(card) {
+        var video        = card.querySelector('video');
+        var progressBar  = card.querySelector('.video-progress');
+        var progressFill = card.querySelector('.video-progress-fill');
+        var overlayIcon  = card.querySelector('.video-overlay-icon');
+        var iconPlay     = card.querySelector('.icon-play');
+        var iconPause    = card.querySelector('.icon-pause');
+
+        if (!video || !progressBar || !progressFill) return;
+
+        function flashIcon(showPause) {
+          if (!overlayIcon || !iconPlay || !iconPause) return;
+          iconPlay.style.display  = showPause ? 'none'  : 'block';
+          iconPause.style.display = showPause ? 'block' : 'none';
+          overlayIcon.style.animation = 'none';
+          overlayIcon.offsetWidth;
+          overlayIcon.style.animation = 'iconFlash 0.65s ease forwards';
+        }
+
+        function getFraction(clientX) {
+          var rect = progressBar.getBoundingClientRect();
+          return Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+        }
+
+        function applySeek(clientX) {
+          if (video.duration) video.currentTime = getFraction(clientX) * video.duration;
+        }
+
+        video.addEventListener('timeupdate', function () {
+          if (video.duration) {
+            var pct = video.currentTime / video.duration * 100;
+            progressFill.style.width = pct + '%';
+            progressBar.setAttribute('aria-valuenow', Math.round(pct));
+          }
+        });
+
+        card.classList.add('is-idle');
+
+        video.addEventListener('click', function () {
+          if (card.classList.contains('is-idle')) {
+            card.classList.remove('is-idle');
+            video.play().catch(function(){});
+            return;
+          }
+          if (video.paused) { video.play().catch(function(){}); flashIcon(false); }
+          else              { video.pause();                    flashIcon(true);  }
+        });
+
+        progressBar.addEventListener('mousedown', function (e) {
+          activeDrag = applySeek; applySeek(e.clientX); e.preventDefault();
+        });
+        progressBar.addEventListener('touchstart', function (e) {
+          activeDrag = applySeek; applySeek(e.touches[0].clientX); e.preventDefault();
+        }, { passive: false });
+      }
+
+      document.querySelectorAll('.demo-video-card').forEach(initVideoCard);
+
+      document.addEventListener('mousemove',  function (e) { if (activeDrag) activeDrag(e.clientX); });
+      document.addEventListener('mouseup',    function ()  { activeDrag = null; });
+      document.addEventListener('touchmove',  function (e) { if (activeDrag) activeDrag(e.touches[0].clientX); }, { passive: true });
+      document.addEventListener('touchend',   function ()  { activeDrag = null; });
+
+      /* ── 5. Demo row: set flex-grow = aspect ratio so videos share full width at equal height ── */
+      var demoRow = document.querySelector('.demo-video-row');
+      if (demoRow) {
+        demoRow.querySelectorAll('.demo-video-card').forEach(function (card) {
+          var video = card.querySelector('video');
+          function applyRatio() {
+            if (video.videoWidth && video.videoHeight) {
+              card.style.flex = (video.videoWidth / video.videoHeight) + ' 1 0';
+            }
+          }
+          if (video.readyState >= 1) { applyRatio(); }
+          else { video.addEventListener('loadedmetadata', applyRatio); }
+        });
+      }
+
+    })();
+  </script>
 
 </body>
 </html>

@@ -2,6 +2,29 @@ body {
   font-family: 'Noto Sans', sans-serif;
 }
 
+.navbar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e8e8e8;
+  min-height: 3.25rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-item {
+  font-family: 'Google Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #363636;
+  padding: 0.5rem 1rem;
+  transition: color 0.2s ease;
+}
+
+.navbar-item:hover {
+  color: #5c66f0;
+  background-color: transparent;
+}
+
 
 .footer .icon-link {
     font-size: 25px;
