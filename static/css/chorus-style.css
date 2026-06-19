@@ -675,6 +675,15 @@ button { font: inherit; }
 
 @media (max-width: 600px) {
   .demo-video-row { flex-direction: column; }
+  .demo-video-row .demo-video-card {
+    flex: none !important;
+    width: 100%;
+  }
+  .demo-video-row .demo-video-card video {
+    aspect-ratio: 16 / 9;
+    height: auto;
+    object-fit: cover;
+  }
 }
 
 /* Overlay play/pause icon */
@@ -1016,4 +1025,11 @@ button { font: inherit; }
   .bibtex-container pre { font-size: 0.72rem; }
 
   .viewer-kicker { font-size: 1.25rem; }
+
+  .viewer-stage {
+    aspect-ratio: unset;
+    min-height: 220px;
+    height: 52vw;
+    max-height: 320px;
+  }
 }
