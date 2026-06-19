@@ -163,10 +163,11 @@ Our work is inspired a lot from the following works. We sincerely appreciate to 
 ## Citation
 If you find our code or paper useful, please cite
 ```bibtex
-@article{lee2026embodiedsplat,
-  title={EmbodiedSplat: Online Feed-Forward Semantic 3DGS for Open-Vocabulary 3D Scene Understanding},
-  author={Lee, Seungjun and Wang, Zihan and Wang, Yunsong and Lee, Gim Hee},
-  journal={arXiv preprint arXiv:2603.04254},
-  year={2026}
-}
+@inproceedings{lee2026embodiedsplat,
+          title={EmbodiedSplat: Online Feed-Forward Semantic 3DGS for Open-Vocabulary 3D Scene Understanding},
+          author={Lee, Seungjun and Wang, Zihan and Wang, Yunsong and Lee, Gim Hee},
+          booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+          pages={23774--23784},
+          year={2026}
+        }
 ```
