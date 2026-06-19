@@ -951,17 +951,27 @@ button { font: inherit; }
     justify-content: flex-start;
     overflow-x: auto;
     overflow-y: hidden;
+    -webkit-mask-image: linear-gradient(to right, black 78%, transparent 100%);
+    mask-image: linear-gradient(to right, black 78%, transparent 100%);
   }
 
-  .hero { max-height: 55vh; }
+  .hero { max-height: 55vh; min-height: 260px; }
 
   .hero-switcher {
     width: min(320px, calc(100% - 20px));
     bottom: 12px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    justify-content: flex-start;
   }
 
+  .hero-switcher::-webkit-scrollbar { display: none; }
+
   .hero-tab {
+    flex: 0 0 auto;
     min-height: 28px;
+    padding: 0 10px;
     font-size: 0.68rem;
   }
 
@@ -1004,4 +1014,6 @@ button { font: inherit; }
   .video-grid-2 { grid-template-columns: 1fr; }
 
   .bibtex-container pre { font-size: 0.72rem; }
+
+  .viewer-kicker { font-size: 1.25rem; }
 }
