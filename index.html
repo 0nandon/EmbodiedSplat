@@ -277,6 +277,100 @@
         <span>Feed-forward design</span>
         <span>Memory efficient CLIP binding</span>
       </div>
+      
+      <br>
+      <p class="eyebrow">Comparison with Existing Methods</p>
+      <p class="section-lead" style="margin-bottom: 0;">
+        Only EmbodiedSplat satisfies all five criteria required for embodied 3D perception.
+      </p>
+      <div class="results-table-wrap">
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Online</th>
+              <th>Near Real-time</th>
+              <th>Feed-Forward</th>
+              <th>Whole-scene Recon</th>
+              <th>Open-vocabulary</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>LangSplat-v1, v2</td>
+              <td><span class="tbl-cross">✗</span></td>
+              <td><span class="tbl-cross">✗</span></td>
+              <td><span class="tbl-cross">✗</span></td>
+              <td><span class="tbl-check">✓</span></td>
+              <td><span class="tbl-check">✓</span></td>
+            </tr>
+            <tr>
+              <td>OpenGaussian</td>
+              <td><span class="tbl-cross">✗</span></td>
+              <td><span class="tbl-cross">✗</span></td>
+              <td><span class="tbl-cross">✗</span></td>
+              <td><span class="tbl-check">✓</span></td>
+              <td><span class="tbl-check">✓</span></td>
+            </tr>
+            <tr>
+              <td>InstanceGaussian</td>
+              <td><span class="tbl-cross">✗</span></td>
+              <td><span class="tbl-cross">✗</span></td>
+              <td><span class="tbl-cross">✗</span></td>
+              <td><span class="tbl-check">✓</span></td>
+              <td><span class="tbl-check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Dr. Splat</td>
+              <td><span class="tbl-cross">✗</span></td>
+              <td><span class="tbl-cross">✗</span></td>
+              <td><span class="tbl-cross">✗</span></td>
+              <td><span class="tbl-check">✓</span></td>
+              <td><span class="tbl-check">✓</span></td>
+            </tr>
+            <tr>
+              <td>LSM</td>
+              <td><span class="tbl-cross">✗</span></td>
+              <td><span class="tbl-check">✓</span></td>
+              <td><span class="tbl-check">✓</span></td>
+              <td><span class="tbl-cross">✗</span></td>
+              <td><span class="tbl-check">✓</span></td>
+            </tr>
+            <tr>
+              <td>SIU3R</td>
+              <td><span class="tbl-cross">✗</span></td>
+              <td><span class="tbl-check">✓</span></td>
+              <td><span class="tbl-check">✓</span></td>
+              <td><span class="tbl-cross">✗</span></td>
+              <td><span class="tbl-check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Online-LangSplat</td>
+              <td><span class="tbl-check">✓</span></td>
+              <td><span class="tbl-partial">🤔</span></td>
+              <td><span class="tbl-cross">✗</span></td>
+              <td><span class="tbl-check">✓</span></td>
+              <td><span class="tbl-check">✓</span></td>
+            </tr>
+            <tr>
+              <td>EA3D</td>
+              <td><span class="tbl-check">✓</span></td>
+              <td><span class="tbl-partial">🤔</span></td>
+              <td><span class="tbl-cross">✗</span></td>
+              <td><span class="tbl-check">✓</span></td>
+              <td><span class="tbl-check">✓</span></td>
+            </tr>
+            <tr class="ours">
+              <td>EmbodiedSplat</td>
+              <td><span class="tbl-check">✓</span></td>
+              <td><span class="tbl-check">✓</span></td>
+              <td><span class="tbl-check">✓</span></td>
+              <td><span class="tbl-check">✓</span></td>
+              <td><span class="tbl-check">✓</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </section>
 
     <!-- Demo ─────────────────────────────────────────────────── -->
@@ -438,7 +532,7 @@
       updateTopbar();
 
       /* ── 3. Active TOC link ── */
-      var sectionIds = ['info','abstract','Motivation','contribution','demo','interactive_demo','method','BibTeX'];
+      var sectionIds = ['info','abstract','Motivation','contribution','demo','interactive_demo','method','results','BibTeX'];
       var tocLinks   = document.querySelectorAll('.toc-link');
 
       var observer = new IntersectionObserver(function (entries) {

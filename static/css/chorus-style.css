@@ -880,6 +880,262 @@ button { font: inherit; }
   50% { box-shadow: 0 0 0 8px rgba(33, 109, 104, 0); }
 }
 
+/* ── Results table ─────────────────────────────────────── */
+.results-table-wrap {
+  margin-top: 28px;
+  overflow-x: auto;
+  border-radius: 18px;
+  border: 1px solid rgba(20, 24, 23, 0.1);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 14px 36px rgba(22, 44, 40, 0.07);
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.results-table thead tr {
+  background: var(--deep-teal);
+}
+
+.results-table thead th {
+  padding: 14px 22px;
+  color: rgba(255, 255, 255, 0.88);
+  font-weight: 850;
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.results-table thead th:first-child {
+  text-align: left;
+  border-radius: 17px 0 0 0;
+}
+
+.results-table thead th:last-child {
+  border-radius: 0 17px 0 0;
+}
+
+.results-table tbody tr {
+  border-top: 1px solid rgba(20, 24, 23, 0.07);
+  transition: background 150ms ease;
+}
+
+.results-table tbody tr:hover {
+  background: rgba(33, 109, 104, 0.05);
+}
+
+.results-table tbody td {
+  padding: 11px 22px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.results-table tbody td:first-child {
+  text-align: left;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* Group divider row */
+.results-table tbody tr.group-divider td {
+  padding: 6px 22px;
+  border-top: 1px solid rgba(20, 24, 23, 0.1);
+  background: rgba(22, 52, 48, 0.04);
+  color: var(--teal);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.results-table tbody tr.group-divider:hover {
+  background: rgba(22, 52, 48, 0.04);
+}
+
+/* Our method highlight */
+.results-table tbody tr.ours {
+  background: linear-gradient(90deg,
+    rgba(33, 109, 104, 0.09) 0%,
+    rgba(33, 109, 104, 0.04) 100%);
+}
+
+.results-table tbody tr.ours td:first-child {
+  color: var(--teal);
+  font-weight: 900;
+}
+
+.results-table tbody tr.ours:hover {
+  background: linear-gradient(90deg,
+    rgba(33, 109, 104, 0.14) 0%,
+    rgba(33, 109, 104, 0.07) 100%);
+}
+
+/* Best value */
+.results-table .best {
+  color: var(--coral);
+  font-weight: 900;
+}
+
+/* Check / cross / partial */
+.tbl-check   { color: var(--teal);  font-weight: 900; font-size: 1rem; }
+.tbl-cross   { color: rgba(20, 24, 23, 0.22); font-size: 1rem; }
+.tbl-partial { color: var(--gold);  font-size: 1.1rem; line-height: 1; }
+
+/* Dense variant — for wide multi-column tables */
+.results-table--dense {
+  font-size: 0.81rem;
+}
+.results-table--dense thead th {
+  padding: 10px 13px;
+  font-size: 0.72rem;
+}
+.results-table--dense tbody td {
+  padding: 8px 13px;
+}
+.results-table--dense .group-divider td {
+  padding: 5px 13px;
+}
+
+/* Sub-header rows (2nd and 3rd thead tr) */
+.results-table--dense thead tr:nth-child(2) th {
+  background: rgba(18, 63, 61, 0.82);
+  font-size: 0.69rem;
+  padding: 8px 13px;
+}
+.results-table--dense thead tr:nth-child(3) th {
+  background: rgba(33, 109, 104, 0.68);
+  font-size: 0.67rem;
+  letter-spacing: 0.03em;
+  padding: 6px 13px;
+  color: rgba(255, 255, 255, 0.78);
+  text-transform: none;
+}
+
+/* Group separator — stronger border on first row of each group */
+.results-table tbody tr.group-start td {
+  border-top: 1.5px solid rgba(20, 24, 23, 0.18);
+}
+
+/* Second-best value */
+.second-best {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 750;
+}
+
+/* Status labels */
+.tbl-online        { color: var(--teal);  font-weight: 850; }
+.tbl-offline       { color: rgba(89, 104, 98, 0.45); }
+.tbl-generalizable { color: var(--teal);  font-weight: 850; }
+.tbl-per-scene     { color: var(--muted); }
+
+/* ── Metric bar chart ──────────────────────────────────── */
+.metric-bars {
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(20, 24, 23, 0.09);
+}
+
+.metric-bars-header {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.metric-bars-title {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 900;
+  color: var(--deep-teal);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.metric-bars-subtitle {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 7px;
+}
+
+.bar-label {
+  flex: 0 0 200px;
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bar-label.is-ours {
+  color: var(--teal);
+  font-weight: 850;
+}
+
+.bar-track {
+  flex: 1;
+  height: 9px;
+  background: rgba(20, 24, 23, 0.07);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  width: var(--w, 0%);
+  border-radius: 999px;
+  background: rgba(89, 104, 98, 0.28);
+  animation: barGrow 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--delay, 0s);
+}
+
+.bar-fill.is-ours {
+  background: linear-gradient(90deg, var(--teal), rgba(33, 109, 104, 0.62));
+}
+
+.bar-fill.is-ours-fast {
+  background: linear-gradient(90deg, rgba(33, 109, 104, 0.68), rgba(33, 109, 104, 0.38));
+}
+
+.bar-value {
+  flex: 0 0 36px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: rgba(89, 104, 98, 0.7);
+  text-align: left;
+}
+
+.bar-value.is-ours { color: var(--teal); font-weight: 900; }
+
+.bar-group-gap { margin-bottom: 14px; }
+
+@keyframes barGrow {
+  from { width: 0; }
+  to   { width: var(--w); }
+}
+
+/* Caption */
+.table-caption {
+  margin: 12px 0 0;
+  color: rgba(68, 82, 78, 0.62);
+  font-size: 0.82rem;
+  line-height: 1.56;
+}
+
 /* ── BibTeX ────────────────────────────────────────────── */
 .bibtex-container {
   margin-top: 24px;
