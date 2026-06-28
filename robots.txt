@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://0nandon.github.io/EmbodiedSplat/sitemap.xml
